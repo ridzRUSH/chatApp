@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat App</title>
+    <link rel="shortcut icon" href="../assets/people.png" type="image/x-icon" />
+  </head>
+  <body>
+    <div class="flex min-h-screen">
+      <!-- Sidebar -->
+      <div class="sidebar bg-gray-800 text-white w-1/4">
+        <!-- Sidebar content goes here -->
+      </div>
+
+      <!-- Main content area -->
+      <div class="flex flex-col flex-grow">
+        <div class="flex-grow msg bg-gray-200 p-4 rounded">
+          <!-- Your messages will appear here -->
+        </div>
+
+        <div class="flex flex-col space-y-4">
+          <div class="flex-grow"></div>
+          <!-- This will push the buttons to the bottom -->
+
+          <div class="flex gap-4">
+            <input
+              type="text"
+              id="message"
+              name="message"
+              defaultValue="message"
+              required
+              autocomplete="off"
+              class="message-box border rounded-md py-2 px-3 w-full"
+            />
+            <button
+              id="sendMsg"
+              class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
+            >
+              <img
+                src="../assets/send.png"
+                class="h-12 w-auto"
+                alt="Send button"
+              />
+            </button>
+            <button
+              id="btn-location"
+              class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+            >
+              Share Location
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script id="sidebar-template" type="text/x-handlebars-template">
+      <div class="bg-gray-800 text-white p-4 rounded-md shadow-lg">
+        <h3 class="text-xl font-semibold mb-4">{{room}}</h3>
+        <h4 class="text-lg font-medium mb-2">Users</h4>
+        <ul class="list-disc list-inside">
+          {{#users}}
+            <li class="mb-1">{{username}}</li>
+          {{/users}}
+        </ul>
+      </div>
+    </script>
+
+    <script id="message-template" type="text/html">
+      <div class="bg-white shadow-md rounded-md p-4 mb-4">
+        <p>
+          <span class="font-semibold">{{username}} </span>
+          <span class="font-semibold">{{createdAt}}</span>
+        </p>
+        <p class="text-gray-700">{{message}}</p>
+      </div>
+    </script>
+
+    <script id="message-template-location" type="text/html">
+      <div class="bg-blue-200 shadow-md rounded-md p-4 mb-4">
+        <span>Some user name </span>
+        <p class="text-blue-900">
+          <a target="_blank" href="{{url}}" class="font-semibold underline"
+            >This is my current location</a
+          >
+        </p>
+      </div>
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.6.0/qs.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./chat.js"></script>
+  </body>
+</html>
